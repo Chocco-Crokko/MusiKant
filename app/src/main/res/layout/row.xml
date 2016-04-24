@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/rowPadding"
+        android:layout_marginRight="@dimen/rowPadding"
+        android:layout_marginStart="@dimen/rowPadding"
+        android:layout_marginEnd="@dimen/rowPadding"
+        android:layout_marginTop="@dimen/halfRowPadding"
+        android:layout_marginBottom="@dimen/halfRowPadding"
+        android:background="@color/white">
+
+        <FrameLayout
+            android:layout_width="@dimen/smallImageSize"
+            android:layout_height="@dimen/smallImageSize"
+            android:id="@+id/frameImg">
+            <ImageView
+                android:id="@+id/smallImage"
+                android:layout_width="@dimen/smallImageSize"
+                android:layout_height="@dimen/smallImageSize" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarSmall"
+                android:layout_gravity="center"/>
+
+
+        </FrameLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/artistNamePreview"
+            android:textSize="25sp"
+            android:layout_toRightOf="@id/frameImg"
+            android:layout_toEndOf="@id/frameImg"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/mainBlack"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="35dp"
+            android:layout_below="@+id/artistNamePreview"
+            android:layout_alignLeft="@+id/artistNamePreview"
+            android:layout_alignStart="@+id/artistNamePreview">
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_tag"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/genresPreview"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/additionalBlack"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@id/frameImg"
+            android:layout_toEndOf="@id/frameImg"
+            android:layout_alignLeft="@+id/artistNamePreview"
+            android:layout_alignStart="@+id/artistNamePreview"
+            android:layout_alignBottom="@id/frameImg"
+            android:textColor="@color/additionalBlack"
+            android:textSize="15sp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/iv_album"
+                android:src="@drawable/ic_album" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/albumsPreview"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/additionalBlack"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/iv_track"
+                android:src="@drawable/ic_music_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tracksPreview"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/additionalBlack"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/chevron"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_right_chevron" />
+
+    </RelativeLayout>
+</RelativeLayout>

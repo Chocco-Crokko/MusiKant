@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">MusiKant</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="sorting_by">Сортировать</string>
+    <string name="internetProblems">Проверьте соединение с интернетом</string>
+    <string name="biography">Биография</string>
+    <string name="error">Unknown error occurs</string>
+    <string name="loading">Загрузка. Пожалуйста, подождите</string>
+    <string name="by_name">По имени</string>
+    <string name="by_tracks">По трекам</string>
+    <string name="by_albums">По альбомам</string>
+    <string name="no_internet">Невозможность видеть отделяет человека от мира вещей. Невозможность подключиться к интернету отделяет человека от музыки</string>
+    <string name="update_hint">Потяните вниз, чтобы обновить</string>
+    <string name="search">Поиск</string>
+    <plurals name="albums">
+        <item quantity="one">%d альбом</item>
+        <item quantity="few">%d альбома</item>
+        <item quantity="many">%d альбомов</item>
+    </plurals>
+    <plurals name="tracks">
+        <item quantity="one">%d песня</item>
+        <item quantity="few">%d песни</item>
+        <item quantity="many">%d песен</item>
+    </plurals>
+
+    <string name="artists">Исполнители</string>
+    <string name="favorite">Избранное</string>
+    <string name="added_in_favorite">Добавлено в избранное</string>
+    <string name="deleted_from_favorite">Удалено из избранного</string>
+</resources>

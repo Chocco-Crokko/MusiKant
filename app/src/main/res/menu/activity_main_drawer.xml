@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/artists"
+            android:icon="@drawable/ic_vector"
+            android:title="@string/artists"
+            android:checked="true"/>
+        <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/ic_thumb_up"
+            android:title="@string/favorite" />
+
+    </group>
+
+
+</menu>

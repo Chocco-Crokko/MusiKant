@@ -1,0 +1,154 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_tb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            >
+            <FrameLayout
+                android:id="@+id/frame_lt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="parallax"
+                    android:id="@+id/bigImage"
+                    android:scaleType="centerCrop"
+                    android:background="@color/colorPrimaryDark"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/gradient_up_to_down" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/gradient_down_to_up" />
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/progressBar" />
+
+
+
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_art"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:src="@drawable/ic_plus"
+        app:layout_anchor="@id/frame_lt"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/genresDetail"
+                android:layout_marginLeft="@dimen/margin_leftright_in_details"
+                android:layout_marginStart="@dimen/margin_leftright_in_details"
+                android:layout_marginTop="@dimen/standard_vertical_margin"
+                android:textColor="@color/additionalBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/albumsTrackDetail"
+                android:layout_marginLeft="@dimen/margin_leftright_in_details"
+                android:layout_marginStart="@dimen/margin_leftright_in_details"
+                android:layout_marginTop="@dimen/standard_vertical_margin"
+                android:textColor="@color/additionalBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/biography"
+                android:id="@+id/biography"
+                android:layout_marginLeft="@dimen/margin_leftright_in_details"
+                android:layout_marginStart="@dimen/margin_leftright_in_details"
+                android:layout_marginTop="@dimen/standard_vertical_margin"
+                android:layout_marginRight="@dimen/margin_leftright_in_details"
+                android:layout_marginEnd="@dimen/margin_leftright_in_details"
+                android:textColor="@color/mainBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/description"
+                android:layout_marginLeft="@dimen/margin_leftright_in_details"
+                android:layout_marginStart="@dimen/margin_leftright_in_details"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:textColor="@color/mainBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorAccent"
+                android:layout_marginLeft="@dimen/margin_leftright_in_details"
+                android:layout_marginStart="@dimen/margin_leftright_in_details"
+                android:layout_marginBottom="@dimen/standard_vertical_margin"
+                android:autoLink="web"
+                android:id="@+id/link"/>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>
