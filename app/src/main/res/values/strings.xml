@@ -19,12 +19,16 @@
         <item quantity="one">%d альбом</item>
         <item quantity="few">%d альбома</item>
         <item quantity="many">%d альбомов</item>
+        <item quantity="other">%d альбомов</item>
     </plurals>
     <plurals name="tracks">
         <item quantity="one">%d песня</item>
         <item quantity="few">%d песни</item>
         <item quantity="many">%d песен</item>
+        <!--old android versions doesn't support russian declension, so we have to add this-->
+        <item quantity="other">%d песен</item>
     </plurals>
+
 
     <string name="artists">Исполнители</string>
     <string name="favorite">Избранное</string>

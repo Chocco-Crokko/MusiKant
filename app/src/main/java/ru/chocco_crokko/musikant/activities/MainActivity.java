@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -128,7 +127,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("qwe", "resume");
         if (adapter != null)
             changeSortingInAdapter(currentSort, currentSearch, false);
     }
@@ -320,6 +318,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
                 fillDatabaseIfIsNotEmpty();
+                changeSortingInAdapter(currentSort, currentSearch, false);
             }
         }, 500);
     }
