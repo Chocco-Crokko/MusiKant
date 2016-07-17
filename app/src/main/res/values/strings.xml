@@ -34,4 +34,6 @@
     <string name="favorite">Избранное</string>
     <string name="added_in_favorite">Добавлено в избранное</string>
     <string name="deleted_from_favorite">Удалено из избранного</string>
+    <string name="about">О программе</string>
+    <string name="test_task">Тестовое задание для Яндекс.Мобилизации\nСвязаться с разработчиком:</string>
 </resources>

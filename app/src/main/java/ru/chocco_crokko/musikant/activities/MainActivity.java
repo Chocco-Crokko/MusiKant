@@ -30,6 +30,7 @@ import ru.chocco_crokko.musikant.R;
 import ru.chocco_crokko.musikant.adapters.ArtistAdapter;
 import ru.chocco_crokko.musikant.data.DBHelper;
 import ru.chocco_crokko.musikant.data.NetworkStaff;
+import ru.chocco_crokko.musikant.fragments.AboutFragment;
 import ru.chocco_crokko.musikant.models.Artist;
 import ru.chocco_crokko.musikant.models.BunchOfArtists;
 import ru.chocco_crokko.musikant.utils.DBConstants;
@@ -240,6 +241,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.sort_albums:
                 changeSortingInAdapter(DBConstants.ALBUMS, currentSearch, true);
+                break;
+            case R.id.about:
+                new AboutFragment().show(getFragmentManager(), "about");
                 break;
         }
 

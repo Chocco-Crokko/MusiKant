@@ -31,4 +31,9 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always">
     </item>
+    <item
+        android:id="@+id/about"
+        android:title="@string/about"
+        app:showAsAction="never">
+    </item>
 </menu>
