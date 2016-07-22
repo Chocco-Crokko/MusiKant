@@ -2,6 +2,7 @@ package ru.chocco_crokko.musikant.activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import ru.chocco_crokko.musikant.data.NetworkStaff;
 import ru.chocco_crokko.musikant.fragments.AboutFragment;
 import ru.chocco_crokko.musikant.models.Artist;
 import ru.chocco_crokko.musikant.models.BunchOfArtists;
+import ru.chocco_crokko.musikant.receivers.MyReceiver;
 import ru.chocco_crokko.musikant.utils.DBConstants;
 
 /*
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, NetworkStaff.CustomCallBack,
         SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
+    private final MyReceiver receiver = new MyReceiver();
     private final String URL_TO_GET_DATA_FROM = "http://download.cdn.yandex.net/mobilization-2016/artists.json";
     private SQLiteDatabase db;
     private ArtistAdapter adapter;
@@ -143,6 +146,13 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         if (adapter != null)
             setSortingInAdapter(currentSort, currentSearch);
+        registerReceiver(receiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     private void createDBFromArrayList(BunchOfArtists arr)
