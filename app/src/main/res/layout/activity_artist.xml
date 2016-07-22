@@ -76,7 +76,7 @@
         android:layout_marginRight="10dp"
         android:clickable="true"
         android:src="@drawable/ic_plus"
-        app:layout_anchor="@id/frame_lt"
+        app:layout_anchor="@id/collapsing_tb"
         app:layout_anchorGravity="bottom|right|end"/>
 
     <android.support.v4.widget.NestedScrollView
