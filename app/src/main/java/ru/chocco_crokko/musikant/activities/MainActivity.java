@@ -2,6 +2,7 @@ package ru.chocco_crokko.musikant.activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import ru.chocco_crokko.musikant.data.NetworkStaff;
 import ru.chocco_crokko.musikant.fragments.AboutFragment;
 import ru.chocco_crokko.musikant.models.Artist;
 import ru.chocco_crokko.musikant.models.BunchOfArtists;
+import ru.chocco_crokko.musikant.receivers.MyReceiver;
 import ru.chocco_crokko.musikant.utils.DBConstants;
 
 /*
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, NetworkStaff.CustomCallBack,
         SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
+    private final MyReceiver receiver = new MyReceiver();
     private final String URL_TO_GET_DATA_FROM = "http://download.cdn.yandex.net/mobilization-2016/artists.json";
     private SQLiteDatabase db;
     private ArtistAdapter adapter;
@@ -61,16 +64,29 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("currentSort", currentSort);
+        outState.putString("currentSearch", currentSearch);
+        outState.putBoolean("isAscending", isAscending);
+        outState.putBoolean("isInFavorite", isInFavorite);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null) {
+            currentSort = savedInstanceState.getString("currentSort");
+            currentSearch = savedInstanceState.getString("currentSearch");
+            isAscending = savedInstanceState.getBoolean("isAscending");
+            isInFavorite = savedInstanceState.getBoolean("isInFavorite");
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         setTitle(R.string.artists);
-        // only in portrait orientation
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // these code allowed to cache loaded images in memory and disk
         // class ImageLoaders require init(...) function before use
@@ -129,7 +145,14 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         if (adapter != null)
-            changeSortingInAdapter(currentSort, currentSearch, false);
+            setSortingInAdapter(currentSort, currentSearch);
+        registerReceiver(receiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     private void createDBFromArrayList(BunchOfArtists arr)
@@ -234,13 +257,13 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.sort_name:
-                changeSortingInAdapter(DBConstants.NAME, currentSearch, true);
+                changeSortingInAdapter(DBConstants.NAME, currentSearch);
                 break;
             case R.id.sort_tracks:
-                changeSortingInAdapter(DBConstants.TRACKS, currentSearch, true);
+                changeSortingInAdapter(DBConstants.TRACKS, currentSearch);
                 break;
             case R.id.sort_albums:
-                changeSortingInAdapter(DBConstants.ALBUMS, currentSearch, true);
+                changeSortingInAdapter(DBConstants.ALBUMS, currentSearch);
                 break;
             case R.id.about:
                 new AboutFragment().show(getFragmentManager(), "about");
@@ -249,22 +272,24 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-    public void changeSortingInAdapter(String order, String searchText, boolean isNeededToChangeSort)
+    public void setSortingInAdapter(String order, String searchText)
     {
-        if (adapter == null)
-            return;
-        if (isNeededToChangeSort && currentSort == order)
+        adapter.changeSorting(db.query(DBConstants.TABLE_NAME, null,
+                DBConstants.NAME + " like '%" + searchText + "%'" + (isInFavorite? " AND " + DBConstants.IN_FAVORITE + " = 1": ""), null, null, null,
+                order + (isAscending? "" : descending)));
+    }
+
+    public void changeSortingInAdapter(String order, String searchText)
+    {
+        if (currentSort == order)
         {
             isAscending = !isAscending;
-
         } else
         {
             currentSort = order;
             isAscending = true;
         }
-        adapter.changeSorting(db.query(DBConstants.TABLE_NAME, null,
-                DBConstants.NAME + " like '%" + searchText + "%'" + (isInFavorite? " AND " + DBConstants.IN_FAVORITE + " = 1": ""), null, null, null,
-                order + (isAscending? "" : descending)));
+        setSortingInAdapter(order, searchText);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -290,7 +315,7 @@ public class MainActivity extends AppCompatActivity
                 } else
                 {
                     isInFavorite = false;
-                    changeSortingInAdapter(currentSort, currentSearch, false);
+                    setSortingInAdapter(currentSort, currentSearch);
                 }
                 Toast.makeText(this, getString(R.string.artists), Toast.LENGTH_SHORT).show();
                 break;
@@ -304,7 +329,7 @@ public class MainActivity extends AppCompatActivity
                 else
                 {
                     isInFavorite = true;
-                    changeSortingInAdapter(currentSort, currentSearch, false);
+                    setSortingInAdapter(currentSort, currentSearch);
                 }
                 Toast.makeText(this, getString(R.string.favorite), Toast.LENGTH_SHORT).show();
                 break;
@@ -322,7 +347,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
                 fillDatabaseIfIsNotEmpty();
-                changeSortingInAdapter(currentSort, currentSearch, false);
+                setSortingInAdapter(currentSort, currentSearch);
             }
         }, 500);
     }
@@ -335,7 +360,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onQueryTextChange(String newText) {
         currentSearch = newText;
-        changeSortingInAdapter(currentSort, newText, false);
+        setSortingInAdapter(currentSort, newText);
         return true;
     }
 }
